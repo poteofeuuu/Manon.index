@@ -3,158 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pour Manon ✨</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --pink: #ffafcc;
-            --dark: #1a1a1a;
-            --white: #ffffff;
-            --soft-pink: #fde2e4;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--white);
-            color: var(--dark);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        #container {
-            text-align: center;
-            padding: 40px;
-            max-width: 500px;
-            width: 90%;
-            border: 2px solid var(--dark);
-            border-radius: 20px;
-            background: var(--white);
-            box-shadow: 10px 10px 0px var(--pink);
-            transition: all 0.5s ease;
-        }
-
-        h1 { font-weight: 600; font-size: 1.5rem; margin-bottom: 30px; line-height: 1.4; }
-
-        .btn-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        button {
-            padding: 15px 25px;
-            border: 2px solid var(--dark);
-            background: var(--white);
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            border-radius: 10px;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: var(--pink);
-            color: var(--white);
-            transform: translateY(-3px);
-        }
-
-        .progress {
-            margin-top: 30px;
-            font-size: 0.8rem;
-            color: #888;
-            letter-spacing: 2px;
-        }
-
-        /* Animation de sortie */
-        .fade-out { opacity: 0; transform: translateY(-20px); }
-        .fade-in { opacity: 1; transform: translateY(0); }
-    </style>
+    <title>Les Aventures de Manon</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div id="container">
-        <div id="content">
-            <h1 id="question">Salut Manon... J'ai quelques questions pour toi. ✨</h1>
-            <div class="btn-container" id="buttons">
-                <button onclick="nextStep(0)">On commence ?</button>
+    <div id="game-container">
+        <header>
+            <h1>Manon vs. La Vie Actuelle</h1>
+            <div id="score-board">Jours survécus : <span id="score">0</span></div>
+        </header>
+
+        <div id="game-area">
+            <div id="manon">👩🏻‍💻</div>
             </div>
-            <div class="progress" id="step-count"></div>
+
+        <div id="overlay">
+            <div id="message-box">
+                <h2>Game Over !</h2>
+                <p id="death-message">La réalité t'a rattrapée...</p>
+                <button onclick="resetGame()">Retenter l'esquive</button>
+            </div>
         </div>
     </div>
 
-    <script>
-        const steps = [
-            {
-                q: "Qu'est-ce qui te fait le plus triper chez moi ?",
-                options: ["Ton côté drôle qui me tue", "Ton côté musicien stylé"]
-            },
-            {
-                q: "Niveau musical, tu es plutôt quelle team ?",
-                options: ["La lourdeur de la Basse 🎸", "Le rythme de la Batterie 🥁"]
-            },
-            {
-                q: "Ce samedi, quel est le programme ?",
-                options: ["Te voir rendre tes baguettes et aller bronzer ensemble", "Bronzer solo, mais tu passes me mettre de la crème pour pas que je crame"]
-            },
-            {
-                q: "L'engin qui avait le plus de flow selon toi ?",
-                options: ["La Golf GTI 7 (classique)", "L'Husqvarna 125cc (supermotard)"]
-            },
-            {
-                q: "Dimanche matin, on fait quoi ?",
-                options: ["Café et petit déj avec toi", "Fais-moi livrer un truc, je veux pas voir ta sale gueule"]
-            },
-            {
-                q: "Dernière question... On fait la paix ?",
-                options: ["Parler, rigoler et avancer avec quelqu'un de sincère", "Mourir sans avoir rigolé une dernière fois avec toi"]
-            },
-            {
-                q: "Merci pour tes réponses Manon. ✨<br>À très vite.",
-                options: []
-            }
-        ];
-
-        let currentStep = -1;
-
-        function nextStep(answerIndex) {
-            currentStep++;
-            const container = document.getElementById('content');
-            
-            // Animation
-            container.classList.add('fade-out');
-
-            setTimeout(() => {
-                if (currentStep < steps.length) {
-                    const step = steps[currentStep];
-                    document.getElementById('question').innerHTML = step.q;
-                    
-                    const btnContainer = document.getElementById('buttons');
-                    btnContainer.innerHTML = '';
-                    
-                    step.options.forEach((opt, index) => {
-                        const btn = document.createElement('button');
-                        btn.innerText = opt;
-                        btn.onclick = () => nextStep(index);
-                        btn.style.animation = `fade-in 0.5s ease forwards`;
-                        btnContainer.appendChild(btn);
-                    });
-
-                    document.getElementById('step-count').innerText = currentStep + 1 + " / " + steps.length;
-                }
-                
-                if (currentStep === steps.length - 1) {
-                    document.getElementById('step-count').style.display = 'none';
-                }
-
-                container.classList.remove('fade-out');
-                container.classList.add('fade-in');
-            }, 500);
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
