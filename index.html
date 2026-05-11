@@ -17,7 +17,7 @@
             <div class="menu-list">
                 <button class="menu-item" onclick="showGame('game-memory')">
                     <span class="icon">🧠</span>
-                    <div class="text"><span>Memory</span><small>Nos moments forts</small></div>
+                    <div class="text"><span>Memory</span><small>Édimbourg au bout ?</small></div>
                 </button>
                 <button class="menu-item" onclick="showGame('game-catch')">
                     <span class="icon">⚡</span>
@@ -25,14 +25,18 @@
                 </button>
                 <button class="menu-item" onclick="showGame('game-slots')">
                     <span class="icon">🎰</span>
-                    <div class="text"><span>Lucky Machine</span><small>Tente ta chance</small></div>
+                    <div class="text"><span>Lucky Machine</span><small>Pizza & Lys</small></div>
+                </button>
+                <button class="menu-item letter-btn" onclick="showGame('game-letter')">
+                    <span class="icon">💌</span>
+                    <div class="text"><span>Lettre ouverte</span><small>Un petit mot pour toi</small></div>
                 </button>
             </div>
         </div>
 
         <!-- JEU MEMORY -->
         <div id="game-memory" class="screen">
-            <div id="rules-memory" class="overlay"><h2>Règles</h2><p>Retrouve les paires de nos souvenirs. Rapide et efficace.</p></div>
+            <div id="rules-memory" class="overlay"><h2>Memory</h2><p>Retrouve les paires de nos souvenirs. <br>Rapide et efficace.</p></div>
             <button class="back-home" onclick="goHome()">🏠</button>
             <div class="memory-grid" id="memory-board"></div>
             <div id="memory-win" class="win-msg"></div>
@@ -40,14 +44,14 @@
 
         <!-- JEU CATCH STRESS -->
         <div id="game-catch" class="screen">
-            <div id="rules-catch" class="overlay"><h2>Stress Killer</h2><p>Clique sur les boules de stress. Chaque clic = un message pour toi.</p></div>
+            <div id="rules-catch" class="overlay"><h2>Stress Killer</h2><p>Clique sur les boules de stress. <br>Chaque clic = un message pour toi.</p></div>
             <button class="back-home" onclick="goHome()">🏠</button>
             <div id="catch-zone"></div>
         </div>
 
         <!-- JEU MACHINE À SOUS -->
         <div id="game-slots" class="screen">
-            <div id="rules-slots" class="overlay"><h2>Machine à KDO</h2><p>Tire le levier. Tu as 5 chances max pour gagner ton cadeau de fin d'exams !</p></div>
+            <div id="rules-slots" class="overlay"><h2>Machine à KDO</h2><p>Tire le levier. <br>Tu as 5 chances max pour gagner !</p></div>
             <button class="back-home" onclick="goHome()">🏠</button>
             <div class="slot-machine">
                 <div class="slot" id="s1">🌸</div>
@@ -56,6 +60,21 @@
             </div>
             <button id="spin-btn" class="spin-button" onclick="spin()">TIRER LE LEVIER</button>
             <div id="slot-result"></div>
+        </div>
+
+        <!-- LA LETTRE -->
+        <div id="game-letter" class="screen">
+            <button class="back-home" onclick="goHome()">🏠</button>
+            <div class="letter-content">
+                <h2 style="color:#fb7185">Pour toi Manon...</h2>
+                <div class="letter-text">
+                    <p>Je sais que tu es en plein dans le tunnel des exams, alors je vais faire court.</p>
+                    <p>J'adore les défis, et tu es le plus gros de ma vie. Je sais que j'ai pas été parfait, j'ai même été une grosse merde par moments, mais j'apprends et je deviens meilleur chaque jour.</p>
+                    <p>Aujourd'hui, si j'ai ton autorisation, je vais tout faire pour toi, parce que j'ai besoin de toi et que je te veux. Je me battrai pour ça.</p>
+                    <p>Mais pour l'instant, oublie tout ça. Concentre-toi sur tes exams, déchire tout. Bonne chance à toi et à tes copines (même celle qui galère sur Valorant, elle se reconnaîtra ! 😂).</p>
+                    <p>Je suis là. ❤️</p>
+                </div>
+            </div>
         </div>
     </div>
 
