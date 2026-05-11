@@ -1,35 +1,64 @@
-<div class="bg-animate"></div>
-<div id="app">
-    <!-- MENU -->
-    <div id="menu" class="screen active">
-        <h1 style="font-weight:800; font-size: 2.5rem; margin-bottom: 0;">Hello.</h1>
-        <p style="opacity: 0.6; margin-bottom: 40px;">Une petite pause, Manon ?</p>
-        <div class="menu-btn" onclick="showGame('game-memory')"><span>🧠 Souvenirs</span> ➔</div>
-        <div class="menu-btn" onclick="showGame('game-catch')"><span>⚡ Stress Killer</span> ➔</div>
-        <div class="menu-btn" onclick="showGame('game-slots')"><span>🎰 Lucky Break</span> ➔</div>
-    </div>
-
-    <!-- JEU MEMORY -->
-    <div id="game-memory" class="screen">
-        <div class="rules-popup"><h2>Memory</h2><p>Retrouve les paires pour débloquer un mot doux.</p></div>
-        <div class="memory-grid"></div>
-    </div>
-
-    <!-- JEU CATCH -->
-    <div id="game-catch" class="screen">
-        <div class="rules-popup"><h2>Stress Killer</h2><p>Clique n'importe où pour évacuer la pression des exams.</p></div>
-        <h2 style="margin-top: 50%;">CLIQUE PARTOUT</h2>
-    </div>
-
-    <!-- JEU MACHINE -->
-    <div id="game-slots" class="screen">
-        <div class="rules-popup"><h2>Lucky Break</h2><p>Tire le levier pour gagner ton cadeau de fin d'exams.</p></div>
-        <div class="slot-container">
-            <div class="slot-box" id="s1">?</div>
-            <div class="slot-box" id="s2">?</div>
-            <div class="slot-box" id="s3">?</div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pause pour Manon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <div id="app">
+        <!-- MENU PRINCIPAL -->
+        <div id="menu" class="screen active">
+            <h1>Hello Manon ✨</h1>
+            <p class="subtitle">Une petite pause de 10 min bien méritée.</p>
+            <div class="menu-list">
+                <button class="menu-item" onclick="showGame('game-memory')">
+                    <span class="icon">🧠</span>
+                    <div class="text"><span>Memory</span><small>Nos moments forts</small></div>
+                </button>
+                <button class="menu-item" onclick="showGame('game-catch')">
+                    <span class="icon">⚡</span>
+                    <div class="text"><span>Stress Killer</span><small>Évacue la pression</small></div>
+                </button>
+                <button class="menu-item" onclick="showGame('game-slots')">
+                    <span class="icon">🎰</span>
+                    <div class="text"><span>Lucky Machine</span><small>Tente ta chance</small></div>
+                </button>
+            </div>
         </div>
-        <button class="menu-btn" style="background:var(--accent); justify-content:center" onclick="spin()">TIRER LE LEVIER</button>
-        <div id="slot-res" style="margin-top: 20px; font-size: 0.9rem;"></div>
+
+        <!-- JEU MEMORY -->
+        <div id="game-memory" class="screen">
+            <div id="rules-memory" class="overlay"><h2>Règles</h2><p>Retrouve les paires de nos souvenirs. Rapide et efficace.</p></div>
+            <button class="back-home" onclick="goHome()">🏠</button>
+            <div class="memory-grid" id="memory-board"></div>
+            <div id="memory-win" class="win-msg"></div>
+        </div>
+
+        <!-- JEU CATCH STRESS -->
+        <div id="game-catch" class="screen">
+            <div id="rules-catch" class="overlay"><h2>Stress Killer</h2><p>Clique sur les boules de stress. Chaque clic = un message pour toi.</p></div>
+            <button class="back-home" onclick="goHome()">🏠</button>
+            <div id="catch-zone"></div>
+        </div>
+
+        <!-- JEU MACHINE À SOUS -->
+        <div id="game-slots" class="screen">
+            <div id="rules-slots" class="overlay"><h2>Machine à KDO</h2><p>Tire le levier. Tu as 5 chances max pour gagner ton cadeau de fin d'exams !</p></div>
+            <button class="back-home" onclick="goHome()">🏠</button>
+            <div class="slot-machine">
+                <div class="slot" id="s1">🌸</div>
+                <div class="slot" id="s2">🌸</div>
+                <div class="slot" id="s3">🌸</div>
+            </div>
+            <button id="spin-btn" class="spin-button" onclick="spin()">TIRER LE LEVIER</button>
+            <div id="slot-result"></div>
+        </div>
     </div>
-</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
