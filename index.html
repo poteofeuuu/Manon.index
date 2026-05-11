@@ -3,31 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Les Aventures de Manon</title>
+    <title>Break Exam - Manon</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div id="game-container">
-        <header>
-            <h1>Manon vs. La Vie Actuelle</h1>
-            <div id="score-board">Jours survécus : <span id="score">0</span></div>
-        </header>
-
-        <div id="game-area">
-            <div id="manon">👩🏻‍💻</div>
-            </div>
-
-        <div id="overlay">
-            <div id="message-box">
-                <h2>Game Over !</h2>
-                <p id="death-message">La réalité t'a rattrapée...</p>
-                <button onclick="resetGame()">Retenter l'esquive</button>
-            </div>
+<div id="app">
+    <!-- MENU PRINCIPAL -->
+    <div id="menu" class="screen active">
+        <h1>Salut Manon ! 🌸</h1>
+        <p>Petite pause méritée. Choisis ton mode :</p>
+        <div class="menu-grid">
+            <div class="card" onclick="showGame('game-memory')">🧠<br>Memory Souvenirs</div>
+            <div class="card" onclick="showGame('game-catch')">🎯<br>Explose le Stress</div>
+            <div class="card" onclick="showGame('game-slots')">🎰<br>Machine à KDO</div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- JEU 1: MEMORY -->
+    <div id="game-memory" class="screen">
+        <button class="back-btn" onclick="showMenu()">← Menu</button>
+        <h2>Memory des Moments</h2>
+        <div class="memory-grid" id="memory-board"></div>
+        <p id="memory-msg"></p>
+    </div>
+
+    <!-- JEU 2: CATCH -->
+    <div id="game-catch" class="screen">
+        <button class="back-btn" onclick="showMenu()">← Menu</button>
+        <h2>Explose les trucs chiants !</h2>
+        <p>Score: <span id="score">0</span></p>
+        <div id="catch-area"></div>
+    </div>
+
+    <!-- JEU 3: SLOTS -->
+    <div id="game-slots" class="screen">
+        <button class="back-btn" onclick="showMenu()">← Menu</button>
+        <h2>La Machine à Motivation</h2>
+        <div class="slots">
+            <div class="slot" id="s1">?</div>
+            <div class="slot" id="s2">?</div>
+            <div class="slot" id="s3">?</div>
+        </div>
+        <button class="play-btn" onclick="spin()">Tirer le levier !</button>
+        <h3 id="slot-result"></h3>
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
