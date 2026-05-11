@@ -1,14 +1,15 @@
 :root {
-    --primary: #ff85a1;
-    --secondary: #ffb3c1;
-    --bg: #fff0f3;
-    --text: #594d5b;
+    --primary: #ff758c;
+    --secondary: #ff7eb3;
+    --bg-gradient: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff);
+    --text: #4a4a4a;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-gradient);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -17,110 +18,89 @@ body {
     overflow: hidden;
 }
 
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 #app {
-    background: white;
-    width: 90%;
-    max-width: 800px;
-    height: 600px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    width: 95%;
+    max-width: 500px;
+    height: 85vh;
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
     position: relative;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    overflow: hidden;
 }
 
-.screen { 
-    display: none; 
-    height: 100%; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    text-align: center; 
+.screen { display: none; height: 100%; flex-direction: column; align-items: center; justify-content: center; }
+.active { display: flex; animation: slideUp 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.active { 
-    display: flex; 
-    animation: fadeIn 0.5s ease; 
-}
-
-@keyframes fadeIn { 
-    from { opacity: 0; transform: translateY(10px); } 
-    to { opacity: 1; transform: translateY(0); } 
-}
-
-h1 { color: var(--primary); margin-bottom: 30px; }
-
-.menu-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-    gap: 20px; 
-    width: 100%; 
-}
-
-.card {
-    background: var(--secondary);
-    padding: 30px 20px;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: transform 0.3s, background 0.3s;
-    color: white;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(255, 133, 161, 0.3);
-}
-
-.card:hover { transform: scale(1.05); background: var(--primary); }
-
-.back-btn {
+/* Règles du jeu (Overlay) */
+.rules-overlay {
     position: absolute;
-    top: 15px;
-    left: 15px;
-    background: #f0f0f0;
-    border: none;
-    padding: 8px 15px;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255, 117, 140, 0.95);
+    color: white;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    text-align: center;
+    border-radius: 30px;
+    transition: opacity 0.5s;
+}
+
+/* Menu */
+.menu-grid { display: flex; flex-direction: column; gap: 15px; width: 100%; }
+.card {
+    background: white;
+    padding: 20px;
     border-radius: 20px;
     cursor: pointer;
-    font-size: 12px;
     transition: 0.3s;
+    border: 2px solid var(--secondary);
+    font-weight: 600;
+}
+.card:hover { transform: scale(1.03); background: var(--secondary); color: white; }
+
+/* Pop-up de motivation */
+.motivation-pop {
+    position: absolute;
+    padding: 10px 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    color: var(--primary);
+    font-weight: bold;
+    pointer-events: none;
+    animation: popUpMsg 1s forwards;
+    z-index: 50;
 }
 
-.back-btn:hover { background: #e0e0e0; }
-
-/* Memory */
-.memory-grid { display: grid; grid-template-columns: repeat(4, 70px); gap: 10px; }
-.memory-card { 
-    width: 70px; height: 70px; 
-    background: var(--primary); 
-    border-radius: 8px; 
-    cursor: pointer; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    font-size: 24px; 
-    color: transparent; 
-    transition: 0.3s;
+@keyframes popUpMsg {
+    0% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0; transform: translateY(-50px); }
 }
-.memory-card.flipped { color: white; background: var(--secondary); pointer-events: none; }
 
-/* Catch */
-#catch-area { width: 100%; height: 350px; background: #fafafa; border-radius: 15px; position: relative; overflow: hidden; cursor: crosshair; border: 1px dashed #ddd; }
-.target { position: absolute; font-size: 35px; cursor: pointer; user-select: none; transition: transform 0.1s; }
-.target:active { transform: scale(0.5); }
+/* Memory & Slots adjustments */
+.memory-grid { display: grid; grid-template-columns: repeat(3, 80px); gap: 10px; }
+.memory-card { width: 80px; height: 80px; background: var(--primary); border-radius: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 30px; color: transparent; }
+.memory-card.flipped { color: white; background: #ffb3c1; }
 
-/* Slots */
-.slots { display: flex; gap: 15px; font-size: 55px; margin-bottom: 25px; }
-.slot { background: white; width: 90px; height: 120px; display: flex; align-items: center; justify-content: center; border-radius: 12px; border: 3px solid var(--primary); box-shadow: inset 0 0 10px rgba(0,0,0,0.05); }
+.slot { background: white; width: 80px; height: 110px; font-size: 40px; display: flex; align-items: center; justify-content: center; border: 3px solid var(--primary); border-radius: 15px; }
 
-button.play-btn {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 12px 35px;
-    border-radius: 30px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 4px 15px rgba(255, 133, 161, 0.4);
-}
-button.play-btn:hover { background: #ff6b8d; transform: translateY(-2px); }
+.back-btn { position: absolute; top: 10px; left: 10px; background: none; border: none; font-size: 20px; cursor: pointer; }
