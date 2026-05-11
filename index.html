@@ -1,55 +1,35 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Break Exam - Manon</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
+<div class="bg-animate"></div>
 <div id="app">
-    <!-- MENU PRINCIPAL -->
+    <!-- MENU -->
     <div id="menu" class="screen active">
-        <h1>Salut Manon ! 🌸</h1>
-        <p>Petite pause méritée. Choisis ton mode :</p>
-        <div class="menu-grid">
-            <div class="card" onclick="showGame('game-memory')">🧠<br>Memory Souvenirs</div>
-            <div class="card" onclick="showGame('game-catch')">🎯<br>Explose le Stress</div>
-            <div class="card" onclick="showGame('game-slots')">🎰<br>Machine à KDO</div>
-        </div>
+        <h1 style="font-weight:800; font-size: 2.5rem; margin-bottom: 0;">Hello.</h1>
+        <p style="opacity: 0.6; margin-bottom: 40px;">Une petite pause, Manon ?</p>
+        <div class="menu-btn" onclick="showGame('game-memory')"><span>🧠 Souvenirs</span> ➔</div>
+        <div class="menu-btn" onclick="showGame('game-catch')"><span>⚡ Stress Killer</span> ➔</div>
+        <div class="menu-btn" onclick="showGame('game-slots')"><span>🎰 Lucky Break</span> ➔</div>
     </div>
 
-    <!-- JEU 1: MEMORY -->
+    <!-- JEU MEMORY -->
     <div id="game-memory" class="screen">
-        <button class="back-btn" onclick="showMenu()">← Menu</button>
-        <h2>Memory des Moments</h2>
-        <div class="memory-grid" id="memory-board"></div>
-        <p id="memory-msg"></p>
+        <div class="rules-popup"><h2>Memory</h2><p>Retrouve les paires pour débloquer un mot doux.</p></div>
+        <div class="memory-grid"></div>
     </div>
 
-    <!-- JEU 2: CATCH -->
+    <!-- JEU CATCH -->
     <div id="game-catch" class="screen">
-        <button class="back-btn" onclick="showMenu()">← Menu</button>
-        <h2>Explose les trucs chiants !</h2>
-        <p>Score: <span id="score">0</span></p>
-        <div id="catch-area"></div>
+        <div class="rules-popup"><h2>Stress Killer</h2><p>Clique n'importe où pour évacuer la pression des exams.</p></div>
+        <h2 style="margin-top: 50%;">CLIQUE PARTOUT</h2>
     </div>
 
-    <!-- JEU 3: SLOTS -->
+    <!-- JEU MACHINE -->
     <div id="game-slots" class="screen">
-        <button class="back-btn" onclick="showMenu()">← Menu</button>
-        <h2>La Machine à Motivation</h2>
-        <div class="slots">
-            <div class="slot" id="s1">?</div>
-            <div class="slot" id="s2">?</div>
-            <div class="slot" id="s3">?</div>
+        <div class="rules-popup"><h2>Lucky Break</h2><p>Tire le levier pour gagner ton cadeau de fin d'exams.</p></div>
+        <div class="slot-container">
+            <div class="slot-box" id="s1">?</div>
+            <div class="slot-box" id="s2">?</div>
+            <div class="slot-box" id="s3">?</div>
         </div>
-        <button class="play-btn" onclick="spin()">Tirer le levier !</button>
-        <h3 id="slot-result"></h3>
+        <button class="menu-btn" style="background:var(--accent); justify-content:center" onclick="spin()">TIRER LE LEVIER</button>
+        <div id="slot-res" style="margin-top: 20px; font-size: 0.9rem;"></div>
     </div>
 </div>
-
-<script src="script.js"></script>
-</body>
-</html>
