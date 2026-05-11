@@ -1,126 +1,93 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
-:root {
-    --accent: #ff4d6d;
-    --bg: #0a0a0a;
-    --card-bg: rgba(255, 255, 255, 0.05);
-}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--bg);
-    color: white;
     margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #0f172a;
+    color: white;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     overflow: hidden;
 }
 
-/* Fond animé avec des orbes de lumière */
-.bg-animate {
+.background-animation {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(45deg, #1e293b, #334155, #1e293b);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
     z-index: -1;
-    background: radial-gradient(circle at 20% 30%, #ff4d6d33 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, #ff758c33 0%, transparent 40%);
 }
+
+@keyframes gradient { 0% {background-position:0% 50%} 50% {background-position:100% 50%} 100% {background-position:0% 50%} }
 
 #app {
-    width: 90%;
-    max-width: 400px;
-    height: 80vh;
-    background: var(--card-bg);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 40px;
+    width: 100%;
+    max-width: 450px;
+    height: 90vh;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
     position: relative;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-}
-
-.screen { display: none; height: 100%; flex-direction: column; text-align: center; }
-.active { display: flex; animation: fadeIn 0.4s ease-out; }
-
-@keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-
-/* Menu Stylé */
-.menu-btn {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
     padding: 20px;
-    margin: 10px 0;
+}
+
+.screen { display: none; height: 100%; flex-direction: column; align-items: center; justify-content: center; }
+.screen.active { display: flex; }
+
+h1 { font-size: 2rem; margin-bottom: 5px; color: #fb7185; }
+.subtitle { opacity: 0.7; margin-bottom: 30px; }
+
+/* Menu buttons */
+.menu-list { width: 100%; display: flex; flex-direction: column; gap: 15px; }
+.menu-item {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px;
     border-radius: 20px;
+    display: flex;
+    align-items: center;
     color: white;
-    font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
-.menu-btn:hover { background: var(--accent); transform: translateX(5px); }
+.menu-item:hover { background: #fb7185; transform: translateY(-3px); }
+.menu-item .icon { font-size: 1.5rem; margin-right: 15px; }
+.menu-item .text { text-align: left; }
+.menu-item .text span { display: block; font-weight: bold; }
+.menu-item .text small { opacity: 0.6; }
 
-/* Memory Pro */
-.memory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
-.memory-card {
-    aspect-ratio: 1;
-    background: rgba(255,255,255,0.1);
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    cursor: pointer;
-    transition: 0.3s;
-    border: 1px solid transparent;
-}
-.memory-card.flipped { background: var(--accent); border-color: white; }
-
-/* Slot Machine Pro */
-.slot-container { display: flex; justify-content: center; gap: 10px; margin: 40px 0; }
-.slot-box {
-    width: 80px; height: 100px;
-    background: black;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    border: 2px solid var(--accent);
-    box-shadow: 0 0 20px rgba(255, 77, 109, 0.3);
+/* Overlays Rules */
+.overlay {
+    position: absolute; inset: 0; background: #0f172a; z-index: 50;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 40px; text-align: center; border-radius: 30px;
 }
 
-/* Règles Pop */
-.rules-popup {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    z-index: 100;
-    border-radius: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 40px;
-    animation: fadeOut 0.5s delay 8s forwards;
-}
+/* Back button */
+.back-home { position: absolute; top: 15px; left: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: white; z-index: 10; }
 
-.notif {
-    position: absolute;
-    background: var(--accent);
-    padding: 10px 20px;
-    border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    pointer-events: none;
-    animation: floatUp 1s forwards;
-}
+/* Memory */
+.memory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.card { width: 80px; height: 80px; background: #334155; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2rem; cursor: pointer; color: transparent; }
+.card.flipped { background: #fb7185; color: white; }
 
-@keyframes floatUp { 
-    0% { transform: translateY(0); opacity: 0; }
-    20% { opacity: 1; }
-    100% { transform: translateY(-100px); opacity: 0; } 
+/* Catch Zone */
+#catch-zone { width: 100%; height: 70%; position: relative; cursor: crosshair; }
+.target { position: absolute; width: 50px; height: 50px; background: #f43f5e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: 0 0 15px #f43f5e; }
+
+/* Slots */
+.slot-machine { display: flex; gap: 10px; margin-bottom: 30px; }
+.slot { width: 80px; height: 100px; background: #1e293b; border: 2px solid #fb7185; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+.spin-button { background: #fb7185; color: white; border: none; padding: 15px 40px; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(251, 113, 133, 0.4); }
+
+/* Motivation Pop */
+.pop-msg {
+    position: absolute; pointer-events: none; color: white; font-weight: bold;
+    animation: popUp 1.2s forwards; z-index: 100; text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
+@keyframes popUp { 0% {transform:translateY(0); opacity:1;} 100% {transform:translateY(-100px); opacity:0;} }
