@@ -1,1 +1,126 @@
+:root {
+    --primary: #ff85a1;
+    --secondary: #ffb3c1;
+    --bg: #fff0f3;
+    --text: #594d5b;
+}
 
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#app {
+    background: white;
+    width: 90%;
+    max-width: 800px;
+    height: 600px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.screen { 
+    display: none; 
+    height: 100%; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+}
+
+.active { 
+    display: flex; 
+    animation: fadeIn 0.5s ease; 
+}
+
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+h1 { color: var(--primary); margin-bottom: 30px; }
+
+.menu-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    gap: 20px; 
+    width: 100%; 
+}
+
+.card {
+    background: var(--secondary);
+    padding: 30px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(255, 133, 161, 0.3);
+}
+
+.card:hover { transform: scale(1.05); background: var(--primary); }
+
+.back-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #f0f0f0;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.3s;
+}
+
+.back-btn:hover { background: #e0e0e0; }
+
+/* Memory */
+.memory-grid { display: grid; grid-template-columns: repeat(4, 70px); gap: 10px; }
+.memory-card { 
+    width: 70px; height: 70px; 
+    background: var(--primary); 
+    border-radius: 8px; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 24px; 
+    color: transparent; 
+    transition: 0.3s;
+}
+.memory-card.flipped { color: white; background: var(--secondary); pointer-events: none; }
+
+/* Catch */
+#catch-area { width: 100%; height: 350px; background: #fafafa; border-radius: 15px; position: relative; overflow: hidden; cursor: crosshair; border: 1px dashed #ddd; }
+.target { position: absolute; font-size: 35px; cursor: pointer; user-select: none; transition: transform 0.1s; }
+.target:active { transform: scale(0.5); }
+
+/* Slots */
+.slots { display: flex; gap: 15px; font-size: 55px; margin-bottom: 25px; }
+.slot { background: white; width: 90px; height: 120px; display: flex; align-items: center; justify-content: center; border-radius: 12px; border: 3px solid var(--primary); box-shadow: inset 0 0 10px rgba(0,0,0,0.05); }
+
+button.play-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 133, 161, 0.4);
+}
+button.play-btn:hover { background: #ff6b8d; transform: translateY(-2px); }
